@@ -44,3 +44,16 @@ vim.api.nvim_create_autocmd("VimEnter", {
     create_mapping({ "n", "v" })
   end,
 })
+
+-- Adjust line length color column for rust files
+vim.api.nvim_create_autocmd("Filetype", { pattern = "rust", command = "set colorcolumn=100" })
+
+-- Shorter columns for text
+local text = vim.api.nvim_create_augroup("text", { clear = true })
+for _, pat in ipairs({ "text", "markdown", "gitcommit" }) do
+  vim.api.nvim_create_autocmd("Filetype", {
+    pattern = pat,
+    group = text,
+    command = "setlocal spell tw=72 colorcolumn=73",
+  })
+end

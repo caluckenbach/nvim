@@ -49,3 +49,6 @@ vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.opt.undofile = true
+
+-- Color columns for line length
+vim.opt.colorcolumn = "80"
