@@ -45,7 +45,6 @@ return {
 
     local servers = {
       clangd = {},
-      gopls = {},
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
@@ -59,15 +58,23 @@ return {
           },
         },
       },
+      rust_analyzer = {
+        settings = {
+          cargo = {
+            allFeatures = true,
+          },
+        },
+      },
+      ruff = {},
     }
 
     require("mason").setup()
 
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      -- TODO: Add my default languages
       "stylua",
-      "gopls",
+      "rust-analyzer",
+      "ruff",
     })
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
