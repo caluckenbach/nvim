@@ -1,12 +1,14 @@
 return {
   "cordx56/rustowl",
-  dependencies = { "neovim/nvim-lspconfig" },
-  config = function()
-    require("lspconfig")["rustowl"].setup({
-      trigger = {
-        hover = false,
-      },
-    })
-    vim.keymap.set("n", "<c-o>", require("rustowl").rustowl_cursor, { noremap = true, silent = true })
-  end,
+  build = "cd rustowl && cargo install --path . --locked",
+  lazy = "false",
+  opts = {
+    client = {
+      on_attach = function(_, buffer)
+        vim.keymap.set("n", "c-o", function()
+          require("rustowl").toggle(buffer)
+        end, { buffer = buffer, desc = "Toggle RustOwl" })
+      end,
+    },
+  },
 }
