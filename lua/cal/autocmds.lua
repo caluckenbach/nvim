@@ -57,3 +57,7 @@ for _, pat in ipairs({ "text", "markdown", "gitcommit" }) do
     command = "setlocal spell tw=72 colorcolumn=73",
   })
 end
+
+vim.diagnostic.config({
+  virtual_lines = { only_current_line = true },
+})
