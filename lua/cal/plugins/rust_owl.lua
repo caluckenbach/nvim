@@ -1,11 +1,12 @@
 return {
   "cordx56/rustowl",
-  build = "cd rustowl && cargo install --path . --locked",
+  version = "*",
+  build = "cargo binstall rustowl",
   lazy = "false",
   opts = {
     client = {
       on_attach = function(_, buffer)
-        vim.keymap.set("n", "c-o", function()
+        vim.keymap.set("n", "<leader>o", function()
           require("rustowl").toggle(buffer)
         end, { buffer = buffer, desc = "Toggle RustOwl" })
       end,
