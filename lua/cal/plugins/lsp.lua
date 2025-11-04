@@ -63,6 +63,9 @@ return {
           cargo = {
             allFeatures = true,
           },
+          check = {
+            build = { allTargets = true },
+          },
         },
       },
       pyright = {},
