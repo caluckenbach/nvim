@@ -30,6 +30,12 @@ return {
     luasnip.config.setup({})
 
     cmp.setup({
+      enabled = function()
+        if vim.env.PUZZLE_MODE == "1" then
+          return false
+        end
+        return true
+      end,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
