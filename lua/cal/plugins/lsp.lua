@@ -1,9 +1,10 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    { "williamboman/mason.nvim", config = true },
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- Mason disabled on NixOS - packages installed via Nix/rustup
+    -- { "williamboman/mason.nvim", config = true },
+    -- "williamboman/mason-lspconfig.nvim",
+    -- "WhoIsSethDaniel/mason-tool-installer.nvim",
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { "j-hui/fidget.nvim", opts = {} },
     { "folke/neodev.nvim", opts = {} },
@@ -44,11 +45,7 @@ return {
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     local servers = {
-      clangd = {},
       lua_ls = {
-        -- cmd = {...},
-        -- filetypes = { ...},
-        -- capabilities = {},
         settings = {
           Lua = {
             completion = {
@@ -68,32 +65,37 @@ return {
           },
         },
       },
-      pyright = {},
       ruff = {},
+      nil_ls = {},
     }
 
-    require("mason").setup()
+    -- Mason disabled on NixOS - packages installed via Nix/rustup
+    -- require("mason").setup()
+    --
+    -- local ensure_installed = vim.tbl_keys(servers or {})
+    -- vim.list_extend(ensure_installed, {
+    --   "stylua",
+    --   "rust-analyzer",
+    --   "pyright",
+    --   "ruff",
+    -- })
+    -- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    --
+    -- require("mason-lspconfig").setup({
+    --   handlers = {
+    --     function(server_name)
+    --       local server = servers[server_name] or {}
+    --       server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+    --       require("lspconfig")[server_name].setup(server)
+    --     end,
+    --   },
+    -- })
 
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      "stylua",
-      "rust-analyzer",
-      "pyright",
-      "ruff",
-    })
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-    require("mason-lspconfig").setup({
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
-      },
-    })
+    -- Setup LSP servers directly (NixOS, nvim 0.11+)
+    for server_name, server_opts in pairs(servers) do
+      server_opts.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server_opts.capabilities or {})
+      vim.lsp.config[server_name] = server_opts
+    end
+    vim.lsp.enable(vim.tbl_keys(servers))
   end,
 }
