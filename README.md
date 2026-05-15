@@ -13,6 +13,17 @@ My personal Neovim configuration using lazy.nvim for plugin management.
 - Harpoon for quick navigation
 - Spell checking is intentionally disabled by default to avoid false positives on technical terms (`:setlocal spell` to enable per buffer, `:setlocal nospell` to disable).
 
+## Review Navigation Cheat Sheet
+
+- Files: `<leader>sf` find files, `<leader>sg` grep project, `<leader><leader>` switch buffers, `<leader>s/` grep open files
+- Pinned files: `<leader>a1..4` assign Harpoon slots, `<leader>1..4` jump to pinned files
+- Code graph: `gd` definition, `gr`/`grr` references, `gI`/`gri` implementations, `<leader>ds` document symbols, `K` hover docs
+- Jump history: `<C-o>` back through jumps, `<C-i>` forward again
+- In-file movement: `<leader>j` Flash jump, `<leader>J` Treesitter jump, `<leader>/` fuzzy search current buffer
+- Git review: `[h` previous hunk, `]h` next hunk, `<leader>hp` preview hunk
+- Review pattern: find the file, jump semantically, use the jumplist to unwind, and avoid repeated `h/j/k/l` browsing
+- This config actively discourages spamming `h/j/k/l`, so the fast path is search + jump + history, not line-by-line crawling
+
 ## Structure
 
 - `init.lua` - Main entry point
