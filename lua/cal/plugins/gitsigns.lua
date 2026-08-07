@@ -6,14 +6,14 @@ return {
     {
       "]h",
       function()
-        require("gitsigns").next_hunk()
+        require("gitsigns").nav_hunk("next")
       end,
       desc = "Next Hunk",
     },
     {
       "[h",
       function()
-        require("gitsigns").prev_hunk()
+        require("gitsigns").nav_hunk("prev")
       end,
       desc = "Prev Hunk",
     },
