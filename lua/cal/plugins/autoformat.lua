@@ -6,7 +6,7 @@ return {
     {
       "<leader>f",
       function()
-        require("conform").format({ async = true, lsp_fallback = true })
+        require("conform").format({ async = true, lsp_format = "fallback" })
       end,
       mode = { "n", "v" },
       desc = "Format buffer",
@@ -22,12 +22,11 @@ return {
 
       return {
         timeout_ms = 500,
-        lsp_fallback = true,
+        lsp_format = "fallback",
       }
     end,
     formatters_by_ft = {
       lua = { "stylua" },
-      go = { "gofmt" },
       nix = { "nixfmt" },
       javascript = { "biome" },
       javascriptreact = { "biome" },
