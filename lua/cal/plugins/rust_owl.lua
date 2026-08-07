@@ -1,7 +1,7 @@
 return {
   "cordx56/rustowl",
   version = "*",
-  build = "cargo binstall rustowl",
+  build = "./scripts/toolchain cargo install --path . --locked",
   lazy = false,
   opts = {
     client = {
