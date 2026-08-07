@@ -21,12 +21,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
--- not sure if this is neccessary,
--- since I chose option 3 from the docs
-vim.opt.softtabstop = 4
-
--- testing if I prefer this or cindent
--- vim.opt.cindent = true
+vim.opt.softtabstop = -1
 vim.opt.smartindent = true
 
 -- Search Settings
