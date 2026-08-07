@@ -65,14 +65,11 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Shorter columns for text
-local text = vim.api.nvim_create_augroup("text", { clear = true })
-for _, pat in ipairs({ "text", "markdown", "gitcommit" }) do
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = pat,
-    group = text,
-    command = "setlocal tw=72 colorcolumn=73",
-  })
-end
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "text", "markdown", "gitcommit" },
+  group = vim.api.nvim_create_augroup("text", { clear = true }),
+  command = "setlocal tw=72 colorcolumn=73",
+})
 
 local treesitter = vim.api.nvim_create_augroup("treesitter-setup", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
