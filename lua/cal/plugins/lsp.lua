@@ -44,9 +44,10 @@ return {
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+        if client and client.server_capabilities.inlayHintProvider then
           map("<leader>th", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            local filter = { bufnr = event.buf }
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
           end, "[T]oggle Inlay [H]ints")
         end
       end,
@@ -71,11 +72,13 @@ return {
       },
       rust_analyzer = {
         settings = {
-          cargo = {
-            allFeatures = true,
-          },
-          check = {
-            build = { allTargets = true },
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+            },
+            check = {
+              allTargets = true,
+            },
           },
         },
       },
