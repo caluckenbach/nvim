@@ -9,7 +9,7 @@ My personal Neovim configuration using lazy.nvim for plugin management.
 - Treesitter for syntax highlighting
 - Telescope for fuzzy finding
 - Gitsigns for inline git hunk workflows
-- mini.nvim modules for comment + surround editing
+- Native commenting and mini.nvim surround editing
 - Harpoon for quick navigation
 - Spell checking is intentionally disabled by default to avoid false positives on technical terms (`:setlocal spell` to enable per buffer, `:setlocal nospell` to disable).
 
@@ -37,15 +37,15 @@ My personal Neovim configuration using lazy.nvim for plugin management.
     - `autoformat.lua` - Automatic code formatting
     - `colors.lua` - Color scheme configuration
     - `completion.lua` - Autocompletion settings
+    - `flash.lua` - Label-based navigation
     - `gitsigns.lua` - Git hunk signs and actions
     - `harpoon.lua` - Quick file navigation
     - `lsp.lua` - Native 0.11+ Language Server configuration
     - `lsp_signature.lua` - Function signature help
     - `lualine.lua` - Status line customization
-    - `mini.lua` - mini.nvim modules (comment/surround)
+    - `mini.lua` - Surround editing
+    - `oil.lua` - Filesystem editing
     - `rust_owl.lua` - Visualize ownership and lifetimes in Rust for debugging and optimization
     - `telescope.lua` - Fuzzy finder configuration
     - `treesitter.lua` - Syntax highlighting
-- `after/` - Additional configuration
-  - `ftplugin/` - Filetype-specific settings
-  - `plugin/` - Post-plugin loading configuration
+- `after/ftplugin/` - Filetype-specific settings
