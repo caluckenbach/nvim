@@ -57,8 +57,11 @@ return {
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     local servers = {
+      biome = {},
       clangd = {},
+      nil_ls = {},
       astro = {},
+      taplo = {},
       tsgo = {},
       lua_ls = {
         settings = {
